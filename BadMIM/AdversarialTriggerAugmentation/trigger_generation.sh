@@ -1,5 +1,5 @@
 python 
-TriggerGenerator_MAE.py 
+TriggerGenerator.py 
 --surrogate_dataset '' 
 --output_dir '' 
 --surrogate_model '' 
