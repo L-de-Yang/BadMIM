@@ -26,8 +26,14 @@ BadMIM/
 
 ### Phase 1: Adversarial Trigger Augmentation
 
-The scripts in this phase is to augment triggers by calculating a universal perturbation. 
+This phase is to augment triggers by calculating a universal perturbation. 
 
   1. Train a surrogate model by using ```bash surrogate_model_train.sh```. This script is train a surrogate model on the surrogate dataset with the clean pre-trained encoder.
   2. Train a augmentation perturbation with the surrogate model by using ```bash trigger_generation.sh```.
 
+### Phase 2: Reconstruction Hijacking
+
+This phase is to inject backdoor into the clean encoder.
+
+  1. Train the clean encoder on poisoned shadow dataset to inject backdoor into it by using ```bash run_reconstruction_hijacking.sh```.
+  2. Finetune the backdoored encoder on downstream datasets by using ```bash run_finetune.sh```.
