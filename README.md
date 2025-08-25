@@ -16,7 +16,7 @@ BadMIM/
 > **Note**: This repository currently supports backdooring MAE models using CIFAR10 as the downstream task.
 
 ## Datasets Preparation
-According to the paper, BadMIM uses three types of datasets: auxiliary dataset, shadow dataset, and downstream dataset. We provide them at [link]. Below is a brief introduction:
+According to the paper, BadMIM uses three types of datasets: auxiliary dataset, shadow dataset, and downstream dataset. We provide them at [datasets](https://figshare.com/s/e7e7e89d8565bf030a1d). Below is a brief introduction:
 
 | Dataset | Content | Description | Location |
 |---------|---------|-------------|---------|
@@ -65,7 +65,7 @@ Set `--target_label` to `256` because web-sourced target class images are stored
 
 > **Note**: For the "dog" class, set `--target_label` to `55` and `--nb_classes` to `256`.
 
-For quick testing, we provide pre-augmented triggers for ten classes at [link], which can be directly used in Step 4.
+For quick testing, we provide pre-augmented triggers for ten classes at [datasets](https://figshare.com/s/e7e7e89d8565bf030a1d), which can be directly used in Step 4.
 
 ### Step 4: Reconstruction Hijacking
 #### Step 4.1: Backdoor Injection
