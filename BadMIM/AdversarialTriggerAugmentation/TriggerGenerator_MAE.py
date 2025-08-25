@@ -9,7 +9,7 @@ import numpy as np
 from PIL import Image
 from tqdm import tqdm
 
-from datasets.surrogate_dataset import SurrogateDataset
+from datasets.auxiliary_dataset import AuxiliaryDataset
 from datasets.eval_dataset import EvalDataset
 from models import models_vit
 
@@ -23,7 +23,7 @@ from util.setup_seed import setup_seed
 def main():
     parser = argparse.ArgumentParser()
     # Dataset parameters
-    parser.add_argument('--surrogate_dataset', type=str, default='./data/Caltech257_airplane')
+    parser.add_argument('--auxiliary_dataset', type=str, default='./data/Caltech257_airplane')
     parser.add_argument('--nb_classes', type=int, default=257)
 
     # Training parameters
@@ -33,7 +33,7 @@ def main():
     parser.add_argument('--output_dir', type=str, default='./outputs/perturbations/mae_airplane/')
     parser.add_argument('--input_size', type=int, default=224)
     parser.add_argument('--seed', type=int, default=0)
-    parser.add_argument('--surrogate_model', type=str, default='./outputs/mae_surrogate_model_Caltech257_airplane/checkpoint-99.pth')
+    parser.add_argument('--auxiliary_model', type=str, default='./outputs/mae_auxiliary_model_Caltech257_airplane/checkpoint-99.pth')
     parser.add_argument('--model', default='mae_vit_base_patch16', type=str, metavar='MODEL',
                         help='Name of model to train')
     parser.add_argument('--device', default='cuda', help='device to use for training / testing')
@@ -73,8 +73,8 @@ def main():
         transforms.Normalize(mean=IMAGENET_DEFAULT_MEAN, std=IMAGENET_DEFAULT_STD)
     ])
 
-    surrogate_dataset = SurrogateDataset(
-        args.surrogate_dataset,
+    auxiliary_dataset = AuxiliaryDataset(
+        args.auxiliary_dataset,
         input_size=args.input_size,
         trigger_path=args.trigger_path,
         target_label=args.target_label,
@@ -83,7 +83,7 @@ def main():
     )
 
     train_loader = torch.utils.data.DataLoader(
-        surrogate_dataset,
+        auxiliary_dataset,
         batch_size=args.batch_size,
         shuffle=True,
         num_workers=args.num_workers,
@@ -91,7 +91,7 @@ def main():
     )
 
     eval_dataset = EvalDataset(
-        args.surrogate_dataset,
+        args.auxiliary_dataset,
         target_label=args.target_label,
         input_size=args.input_size,
         trigger_path=args.trigger_path,
@@ -114,7 +114,7 @@ def main():
     model = models_vit.__dict__[args.model](
         num_classes=args.nb_classes,
     )
-    checkpoint = torch.load(args.surrogate_model, map_location='cpu')
+    checkpoint = torch.load(args.auxiliary_model, map_location='cpu')
     msg = model.load_state_dict(checkpoint['model'])
     model.to(device)
     print(msg)
