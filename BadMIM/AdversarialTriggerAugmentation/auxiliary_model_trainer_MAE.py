@@ -129,7 +129,7 @@ def evaluate(data_loader, model, device):
 def main():
     parser = argparse.ArgumentParser()
     # Dataset parameters
-    parser.add_argument('--surrogate_dataset', type=str, default='./data/Caltech257_airplane/')
+    parser.add_argument('--auxiliary_dataset', type=str, default='./data/Caltech257_airplane/')
     parser.add_argument('--nb_classes', type=int, default=257)
 
     # Training parameters
@@ -147,7 +147,7 @@ def main():
     parser.add_argument('--seed', default=0, type=int)
     parser.add_argument('--resume', default='', type=str)
     parser.add_argument('--num_workers', default=4, type=int)
-    parser.add_argument('--output_dir', default='./outputs/mae_surrogate_model_Caltech257_airplane', help='path where to save, empty for no saving')
+    parser.add_argument('--output_dir', default='./outputs/mae_auxiliary_model_Caltech257_airplane', help='path where to save, empty for no saving')
     parser.add_argument('--log_dir', help='path where to tensorboard log')
     parser.add_argument('--finetune', default='./pretrained_weights/mae_visualize_vit_base.pth', help='finetune from checkpoint')  # For linear probe
 
@@ -183,10 +183,10 @@ def main():
         transforms.Normalize(mean=IMAGENET_DEFAULT_MEAN, std=IMAGENET_DEFAULT_STD)
     ])
 
-    surrogate_dataset = datasets.ImageFolder(args.surrogate_dataset, transform=train_transform)
+    auxiliary_dataset = datasets.ImageFolder(args.auxiliary_dataset, transform=train_transform)
 
     train_loader = torch.utils.data.DataLoader(
-        surrogate_dataset,
+        auxiliary_dataset,
         batch_size=args.batch_size,
         shuffle=True,
         num_workers=args.num_workers,
@@ -273,7 +273,7 @@ def main():
             )
 
         test_stats = evaluate(train_loader, model, device)
-        print(f"Accuracy of the network on the {len(surrogate_dataset)} surrogate images: {test_stats['acc1']:.1f}%")
+        print(f"Accuracy of the network on the {len(auxiliary_dataset)} auxiliary images: {test_stats['acc1']:.1f}%")
         max_accuracy = max(max_accuracy, test_stats["acc1"])
         print(f'Max accuracy: {max_accuracy:.2f}%')
 
