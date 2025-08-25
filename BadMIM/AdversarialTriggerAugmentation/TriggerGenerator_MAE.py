@@ -44,7 +44,7 @@ def main():
     parser.add_argument('--target_label', type=int, default=256)
     parser.add_argument('--epsilon', type=float, default=64/255, help='Radius of the L-inf ball')
     parser.add_argument('--trigger_path', type=str, default='./data/triggers/airplane.png')
-    parser.add_argument('--pert_pic_save_path', type=str, default='./outputs/pert_airplane_mae1.png')
+    parser.add_argument('--pert_pic_save_path', type=str, default='./outputs/mae_pert_airplane.png')
 
     # Get parameters
     args = parser.parse_args()
