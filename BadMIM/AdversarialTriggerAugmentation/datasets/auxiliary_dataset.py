@@ -6,7 +6,7 @@ from PIL import Image
 
 IMG_EXTENSIONS = (".jpg", ".jpeg", ".png", ".ppm", ".bmp", ".pgm", ".tif", ".tiff", ".webp")
 
-class SurrogateDataset(DatasetFolder):
+class AuxiliaryDataset(DatasetFolder):
     def __init__(self,
                  data_dir,
                  input_size,
@@ -15,7 +15,7 @@ class SurrogateDataset(DatasetFolder):
                  trigger_transform=None,
                  transform=None,
                  is_valid_file=None):
-        super(SurrogateDataset, self).__init__(
+        super(AuxiliaryDataset, self).__init__(
             data_dir,
             loader=torchvision.datasets.folder.default_loader,
             extensions=IMG_EXTENSIONS if is_valid_file is None else None,
