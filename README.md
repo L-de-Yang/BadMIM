@@ -55,7 +55,7 @@ Augment triggers using the trained auxiliary models:
 python TriggerGenerator_MAE.py \
     --auxiliary_dataset /path/to/auxiliary/dataset/for/airplane/ \
     --output_dir /path/to/output/dir/ \
-    --surrogate_model /path/to/auxiliary/model/for/airplane/ \
+    --auxiliary_model /path/to/auxiliary/model/for/airplane/ \
     --trigger_path /path/to/airplane/original/trigger/ \
     --pert_pic_save_path /path/to/save/augmented/trigger/ \
     --target_label 256
