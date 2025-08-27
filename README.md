@@ -16,7 +16,7 @@ BadMIM/
 > **Note**: This repository currently supports backdooring MAE models using CIFAR10 as the downstream task.
 
 ## Datasets Preparation
-According to the paper, BadMIM uses three types of datasets: auxiliary dataset, shadow dataset, and downstream dataset. we provide them via an anonymous link: [datasets](https://figshare.com/s/e7e7e89d8565bf030a1d). Below is a brief introduction:
+According to the paper, BadMIM uses three types of datasets: auxiliary dataset, shadow dataset, and downstream dataset. We provide them via an anonymous link: [datasets](https://figshare.com/s/e7e7e89d8565bf030a1d). Below is a brief introduction:
 
 | Dataset | Content | Description | Location |
 |---------|---------|-------------|---------|
